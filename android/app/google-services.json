@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "445239808174",
+    "firebase_url": "https://rahma-osc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "rahma-osc",
+    "storage_bucket": "rahma-osc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445239808174:android:59547f8916f680c6895d3f",
+        "android_client_info": {
+          "package_name": "com.example.first_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaGAAAX8Ug7MbzXbVZddIJBXuwyIwsrJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445239808174:android:a999adca2d1e580b895d3f",
+        "android_client_info": {
+          "package_name": "com.example.movies_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaGAAAX8Ug7MbzXbVZddIJBXuwyIwsrJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

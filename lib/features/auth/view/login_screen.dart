@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           passwordController.text.trim(),
                         );
                         if (ok && context.mounted) {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (_) => const MainScreen(),
@@ -106,7 +106,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                     ),
-
               const SizedBox(height: 16),
 
               Row(
@@ -150,29 +149,42 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: double.infinity,
                 height: 54,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    AppAssets.googleIcon,
-                    width: 24,
-                    height: 24,
-                  ),
-                  label: const Text(
-                    AppStrings.loginWithGoogle,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.yellow,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                ),
+                child: vm.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ElevatedButton.icon(
+                        onPressed: () async {
+                          final ok = await context
+                              .read<AuthViewModel>()
+                              .signInWithGoogle();
+                          if (ok && context.mounted) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const MainScreen(),
+                              ),
+                            );
+                          }
+                        },
+                        icon: Image.asset(
+                          AppAssets.googleIcon,
+                          width: 24,
+                          height: 24,
+                        ),
+                        label: const Text(
+                          AppStrings.loginWithGoogle,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.yellow,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
               ),
-
               const SizedBox(height: 24),
 
               LanguageToggle(

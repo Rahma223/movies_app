@@ -5,7 +5,6 @@ import 'package:movies_app/ui/utils/app_strings.dart';
 import 'package:movies_app/ui/widgets/custom_widgets.dart';
 import 'package:provider/provider.dart';
 
-
 import '../view_model/auth_view_model.dart';
 import 'login_screen.dart';
 
@@ -17,11 +16,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final nameController            = TextEditingController();
-  final emailController           = TextEditingController();
-  final passwordController        = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final phoneController           = TextEditingController();
+  final phoneController = TextEditingController();
 
   @override
   void dispose() {
@@ -43,12 +42,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         backgroundColor: AppColors.black,
         elevation: 0,
         leading: IconButton(
-          icon:  Icon(Icons.arrow_back, color: AppColors.yellow),
+          icon: Icon(Icons.arrow_back, color: AppColors.yellow),
           onPressed: () => Navigator.pop(context),
         ),
-        title:  Text(
+        title: Text(
           AppStrings.register,
-          style: TextStyle(color: AppColors.yellow, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: AppColors.yellow,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -62,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(AppAssets.avatars.length, (index) {
                 bool isSelected = index == vm.selectedAvatar;
-                double size = isSelected ? 150 : 80;
+                double size = isSelected ? 140 : 60;
 
                 return GestureDetector(
                   onTap: () => context.read<AuthViewModel>().pickAvatar(index),
@@ -127,7 +129,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: confirmPasswordController,
               hint: 'Confirm Password',
               isVisible: vm.showConfirmPassword,
-              onToggle: () => context.read<AuthViewModel>().toggleConfirmPassword(),
+              onToggle: () =>
+                  context.read<AuthViewModel>().toggleConfirmPassword(),
             ),
             const SizedBox(height: 14),
 
@@ -146,39 +149,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 20),
 
             vm.isLoading
-                ?  CircularProgressIndicator(color: AppColors.yellow)
+                ? CircularProgressIndicator(color: AppColors.yellow)
                 : PrimaryButton(
-              label: AppStrings.createAccount,
-              onPressed: () async {
-                final ok = await context.read<AuthViewModel>().register(
-                  nameController.text.trim(),
-                  emailController.text.trim(),
-                  passwordController.text.trim(),
-                  confirmPasswordController.text.trim(),
-                  phoneController.text.trim(),
-                );
-                if (ok && context.mounted) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const LoginScreen()),
-                  );
-                }
-              },
-            ),
+                    label: AppStrings.createAccount,
+                    onPressed: () async {
+                      final ok = await context.read<AuthViewModel>().register(
+                        nameController.text.trim(),
+                        emailController.text.trim(),
+                        passwordController.text.trim(),
+                        confirmPasswordController.text.trim(),
+                        phoneController.text.trim(),
+                      );
+                      if (ok && context.mounted) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const LoginScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
 
             const SizedBox(height: 16),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 Text('Already Have Account ? ',
-                    style: TextStyle(color: AppColors.gray)),
+                Text(
+                  'Already Have Account ? ',
+                  style: TextStyle(color: AppColors.gray),
+                ),
                 GestureDetector(
                   onTap: () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (_) => const LoginScreen()),
                   ),
-                  child:  Text(
+                  child: Text(
                     'Login',
                     style: TextStyle(
                       color: AppColors.yellow,
